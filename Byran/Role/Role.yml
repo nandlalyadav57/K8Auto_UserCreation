@@ -1,0 +1,40 @@
+#Create a ROLE in dev namespace
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+  namespace: dev
+rules:
+- apiGroups: [" "]
+  resources: [ * ]
+  verbs: [ * ]
+======================================================================
+#Create a ROLE in staging namespace
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: tester
+  namespace: staging
+rules:
+- apiGroups: [" "]
+  resources: [ "pod", "svc" ]
+  verbs: [ "create", "get", "list", "watch" ]
+
+=======================================================================
+
+#Create a ROLE in production namespace
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devops
+  namespace: production
+rules:
+- apiGroups: [" "]
+  resources: [ "pod", "svc" ]
+  verbs: [ "get", "list", "watch" ]
+========================================================================
+
+
