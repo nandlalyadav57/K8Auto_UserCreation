@@ -70,8 +70,8 @@ kubectl create namespace production
 
 •	Create Role and ClusterRole
  
-To create them:
+To create them use yaml from Role folder
 
-kubectl create -f /path/to/your/yaml/file
+kubectl create -f /Role
 
 
