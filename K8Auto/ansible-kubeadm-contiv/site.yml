@@ -1,0 +1,37 @@
+---
+# This playbook deploys a simple kubeadm install.
+- name: Bootstrap Tasks
+  hosts: 
+    - master
+    - worker
+  remote_user: "ubuntu"
+  gather_facts: False
+
+  roles:
+    - common
+
+- name: Install Kubernetes master
+  hosts: master
+  remote_user: "ubuntu"
+  become: yes
+  become_method: sudo
+  roles:
+    - docker
+    - kubeadm
+    - master
+    - contiv
+
+- name: Install nodes
+  remote_user: "ubuntu"
+  hosts: worker
+  become: yes
+  become_method: sudo
+  roles:
+    - docker
+    - kubeadm
+    - worker
+
+- import_playbook: deploy_contiv_network_config.yml
+- import_playbook: deploy_istio.yml
+- import_playbook: deploy_sample_apps.yml
+
